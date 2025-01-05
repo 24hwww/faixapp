@@ -1,14 +1,22 @@
 {
-    "build": {
-      "android": {
-        "release": {
-          "buildType": "app-bundle"
-        }
+  "build": {
+    "android": {
+      "development": {
+        "workflow": "managed"
       },
-      "ios": {
-        "release": {
-          "simulator": false
-        }
+      "production": {
+        "workflow": "managed",
+        "buildType": "app-bundle"
+      }
+    },
+    "ios": {
+      "development": {
+        "workflow": "managed"
+      },
+      "production": {
+        "workflow": "managed",
+        "simulator": false
       }
     }
-  }  
+  }
+}
