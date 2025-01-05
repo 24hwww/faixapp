@@ -13,24 +13,26 @@ declare global {
 
 export default function GoogleAd({ client, slot }: Props) {
   const adRef = useRef<HTMLModElement>(null);
-  const initialized = useRef(false);
 
   useEffect(() => {
-    if (adRef.current && !initialized.current) {
-      try {
-        if (!window.adsbygoogle) {
-          window.adsbygoogle = [];
-        }
-        window.adsbygoogle.push({});
-        initialized.current = true;
-      } catch (error) {
-        console.error('Error loading AdSense:', error);
-      }
+    if (!adRef.current) return;
+
+    // Evitar reinicialización en componentes remount
+    if (adRef.current.getAttribute("data-adsbygoogle-status") === "done") {
+      return;
     }
 
-    return () => {
-      initialized.current = false;
-    };
+    try {
+      if (!window.adsbygoogle) {
+        window.adsbygoogle = [];
+      }
+
+      setTimeout(() => {
+        window.adsbygoogle.push({});
+      }, 500); // Esperar 500ms para asegurar que AdSense está cargado
+    } catch (error) {
+      console.error("Error loading AdSense:", error);
+    }
   }, []);
 
   return (

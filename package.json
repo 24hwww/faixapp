@@ -14,7 +14,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "workbox-core": "^7.0.0",
-    "workbox-precaching": "^7.0.0"
+    "workbox-precaching": "^7.0.0",
+    "workbox-sw": "^7.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
