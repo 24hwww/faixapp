@@ -14,7 +14,9 @@ export default function GenerationItem({ generation, onDelete }: Props) {
         <div>
           <span className="text-2xl font-bold text-indigo-600">{generation.number}</span>
           <div className="text-sm text-gray-600 mt-1">
-            Range: {generation.min} - {generation.max}
+            <div>Range: {generation.min} - {generation.max}</div>
+            {generation.isEven && <div>Even numbers only</div>}
+            {generation.step > 1 && <div>Step size: {generation.step}</div>}
           </div>
         </div>
         <div className="flex items-center gap-2">

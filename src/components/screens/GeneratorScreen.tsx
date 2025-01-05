@@ -1,9 +1,10 @@
 import React from 'react';
 import NumberGenerator from '../NumberGenerator';
 import { X } from 'lucide-react';
+import type { GeneratorOptions } from '../../types';
 
 interface Props {
-  onGenerate: (min: number, max: number, number: number) => void;
+  onGenerate: (min: number, max: number, number: number, options: GeneratorOptions) => void;
   onClose: () => void;
 }
 
@@ -17,10 +18,7 @@ export default function GeneratorScreen({ onGenerate, onClose }: Props) {
         >
           <X className="w-6 h-6 text-gray-600" />
         </button>
-        <NumberGenerator onGenerate={(min, max, number) => {
-          onGenerate(min, max, number);
-          onClose();
-        }} />
+        <NumberGenerator onGenerate={onGenerate} />
       </div>
     </div>
   );
