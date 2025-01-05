@@ -17,19 +17,19 @@ export default function GoogleAd({ client, slot }: Props) {
   useEffect(() => {
     if (!adRef.current) return;
 
-    // Evitar reinicialización en componentes remount
-    if (adRef.current.getAttribute("data-adsbygoogle-status") === "done") {
-      return;
+    // Verificar si el 'ins' ya tiene un anuncio cargado
+    if (adRef.current.hasAttribute("data-adsbygoogle-status") && adRef.current.getAttribute("data-adsbygoogle-status") === "done") {
+      return; // El anuncio ya fue cargado, no intentar cargarlo de nuevo
     }
 
     try {
       if (!window.adsbygoogle) {
         window.adsbygoogle = [];
       }
-
-      setTimeout(() => {
-        window.adsbygoogle.push({});
-      }, 500); // Esperar 500ms para asegurar que AdSense está cargado
+      // Añadir el anuncio solo si no está cargado
+      window.adsbygoogle.push({});
+      // Marcar como cargado
+      adRef.current.setAttribute("data-adsbygoogle-status", "done");
     } catch (error) {
       console.error("Error loading AdSense:", error);
     }
